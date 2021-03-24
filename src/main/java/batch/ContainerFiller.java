@@ -1,5 +1,7 @@
 package batch;
 
+import batch.exception.NotSupportedParamException;
+
 import java.util.Arrays;
 
 public class ContainerFiller {
@@ -11,8 +13,14 @@ public class ContainerFiller {
     private int workTime;
 
 
-    public ContainerFiller(int[] volumes, int k) {
+    public ContainerFiller(int[] volumes, int k) throws NotSupportedParamException {
+        if (volumes == null || volumes.length == 0) {
+            throw new NotSupportedParamException("volumes table is empty or null");
+        }
         this.volumes = volumes;
+        if (k < 1) {
+            throw new NotSupportedParamException("param k should b at least 1");
+        }
         this.k = k;
     }
 
